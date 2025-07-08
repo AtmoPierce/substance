@@ -10,6 +10,7 @@ use solid::solid::Solid;
 #[derive(Debug, Clone)]
 pub struct Air{
     pub id: String,
+    pub height: f64, // in meters
     pub pressure: f64,
     pub density: f64,
     pub isentropic_expansion_factor: f64,
@@ -21,6 +22,7 @@ impl Default for Air{
     fn default()->Self{
         Air{
             id: String::from("sea_level_air"),
+            height: 0.0,                                   // in meters
             pressure: 101325.0,                             // Pa
             density: 1.225,                                 // (kg/m^3)
             isentropic_expansion_factor: 1.4,               // (dimensionless)
@@ -31,7 +33,7 @@ impl Default for Air{
 }
 
 impl Air{
-    pub fn new(pressure: f64, density: f64, isentropic_expansion_factor: f64, gas_constant: f64, dynamic_viscosity: f64)->Self{
+    pub fn new(height: f64, pressure: f64, density: f64, isentropic_expansion_factor: f64, gas_constant: f64, dynamic_viscosity: f64)->Self{
         Air{
             id: format!(
                 "{}_{}_{}_{}_{}",
@@ -41,6 +43,7 @@ impl Air{
                 gas_constant,
                 dynamic_viscosity
             ),
+            height: height,
             pressure: pressure,
             density: density,
             isentropic_expansion_factor: isentropic_expansion_factor,
