@@ -36,7 +36,8 @@ impl Air{
     pub fn new(height: f64, pressure: f64, density: f64, isentropic_expansion_factor: f64, gas_constant: f64, dynamic_viscosity: f64)->Self{
         Air{
             id: format!(
-                "{}_{}_{}_{}_{}",
+                "h{}_p{}_d{}_g{}_r{}_v{}",
+                height,
                 pressure,
                 density,
                 isentropic_expansion_factor,
