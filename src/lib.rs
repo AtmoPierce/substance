@@ -9,12 +9,12 @@ use solid::solid::Solid;
 
 #[derive(Debug, Clone)]
 pub struct Air{
-    id: String,
-    pressure: f64,
-    density: f64,
-    isentropic_expansion_factor: f64,
-    gas_constant: f64,
-    dynamic_viscosity: f64
+    pub id: String,
+    pub pressure: f64,
+    pub density: f64,
+    pub isentropic_expansion_factor: f64,
+    pub gas_constant: f64,
+    pub dynamic_viscosity: f64
 }
 
 impl Default for Air{
