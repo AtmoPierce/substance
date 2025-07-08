@@ -33,7 +33,14 @@ impl Default for Air{
 impl Air{
     pub fn new(pressure: f64, density: f64, isentropic_expansion_factor: f64, gas_constant: f64, dynamic_viscosity: f64)->Self{
         Air{
-            id: pressure.to_string() + "_" + density.to_string() + "_" + isentropic_expansion_factor.to_string() + "_" + gas_constant.to_string() + "_" + dynamic_viscosity.to_string(),
+            id: format!(
+                "{}_{}_{}_{}_{}",
+                pressure,
+                density,
+                isentropic_expansion_factor,
+                gas_constant,
+                dynamic_viscosity
+            ),
             pressure: pressure,
             density: density,
             isentropic_expansion_factor: isentropic_expansion_factor,
