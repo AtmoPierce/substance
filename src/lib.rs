@@ -6,6 +6,7 @@ mod liquid;
 use liquid::liquid::Liquid;
 mod solid;
 use solid::solid::Solid;
+use sha2::{Sha256, Digest};
 
 #[derive(Debug, Clone)]
 pub struct Air{
@@ -41,25 +42,16 @@ impl Air{
     }
 
     pub fn get_hash(height: f64, pressure: f64, density: f64, isentropic_expansion_factor: f64, gas_constant: f64, dynamic_viscosity: f64) -> String {
-        let raw_id = format!("h{height}_p{pressure}_d{density}_g{gamma}_r{R}_v{mu}");
+        let raw_id = format!("h{height}_p{pressure}_d{density}_g{isentropic_expansion_factor}_r{gas_constant}_v{dynamic_viscosity}");
         let air_id = Self::hash_air_id(&raw_id);
         return air_id;
     }
 
     pub fn new(height: f64, pressure: f64, density: f64, isentropic_expansion_factor: f64, gas_constant: f64, dynamic_viscosity: f64)->Self{
-        let raw_id = format!("h{height}_p{pressure}_d{density}_g{gamma}_r{R}_v{mu}");
-        let air_id = hash_air_id(&raw_id);
-
+        let raw_id = format!("h{height}_p{pressure}_d{density}_g{isentropic_expansion_factor}_r{gas_constant}_v{dynamic_viscosity}");
+        let air_id = Self::hash_air_id(&raw_id);
         Air{
-            id: format!(
-                air_id,
-                height,
-                pressure,
-                density,
-                isentropic_expansion_factor,
-                gas_constant,
-                dynamic_viscosity
-            ),
+            id: air_id,
             height: height,
             pressure: pressure,
             density: density,
