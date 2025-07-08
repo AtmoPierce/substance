@@ -42,7 +42,7 @@ impl Air{
 
     pub fn get_hash(height: f64, pressure: f64, density: f64, isentropic_expansion_factor: f64, gas_constant: f64, dynamic_viscosity: f64) -> String {
         let raw_id = format!("h{height}_p{pressure}_d{density}_g{gamma}_r{R}_v{mu}");
-        let air_id = hash_air_id(&raw_id);
+        let air_id = Self::hash_air_id(&raw_id);
         return air_id;
     }
 
