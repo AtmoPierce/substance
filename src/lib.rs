@@ -7,7 +7,9 @@ use liquid::liquid::Liquid;
 mod solid;
 use solid::solid::Solid;
 
+#[derive(Debug, Clone, Default)]
 pub struct Air{
+    id: String,
     pressure: f64,
     density: f64,
     isentropic_expansion_factor: f64,
@@ -18,6 +20,7 @@ pub struct Air{
 impl Default for Air{
     fn default()->Self{
         Air{
+            id: String::from("sea_level_air"),
             pressure: 101325.0,                             // Pa
             density: 1.225,                                 // (kg/m^3)
             isentropic_expansion_factor: 1.4,               // (dimensionless)
@@ -30,6 +33,7 @@ impl Default for Air{
 impl Air{
     pub fn new(pressure: f64, density: f64, isentropic_expansion_factor: f64, gas_constant: f64, dynamic_viscosity: f64)->Self{
         Air{
+            id: pressure.to_string() + "_" + density.to_string() + "_" + isentropic_expansion_factor.to_string() + "_" + gas_constant.to_string() + "_" + dynamic_viscosity.to_string(),
             pressure: pressure,
             density: density,
             isentropic_expansion_factor: isentropic_expansion_factor,
@@ -40,7 +44,7 @@ impl Air{
     pub fn get_density(&self)->f64{
         return self.density;
     }
-        
+    
     pub fn characteristic_velocity(&self)->f64{
         let characteristic_velocity = (self.isentropic_expansion_factor * (self.pressure / self.density)).powf(0.5);
         return characteristic_velocity 
