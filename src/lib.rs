@@ -7,7 +7,7 @@ use liquid::liquid::Liquid;
 mod solid;
 use solid::solid::Solid;
 
-#[derive(Debug, Clone, Default)]
+#[derive(Debug, Clone)]
 pub struct Air{
     id: String,
     pressure: f64,
