@@ -10,3 +10,4 @@ bench = false
 test = true
 
 [dependencies]
+sha2 = "*"

@@ -33,10 +33,26 @@ impl Default for Air{
 }
 
 impl Air{
+    fn hash_air_id(raw: &str) -> String {
+        let mut hasher = Sha256::new();
+        hasher.update(raw.as_bytes());
+        let hash = hasher.finalize();
+        format!("{:x}", &hash)[..12].to_string() // use first 12 hex digits
+    }
+
+    pub fn get_hash(height: f64, pressure: f64, density: f64, isentropic_expansion_factor: f64, gas_constant: f64, dynamic_viscosity: f64) -> String {
+        let raw_id = format!("h{height}_p{pressure}_d{density}_g{gamma}_r{R}_v{mu}");
+        let air_id = hash_air_id(&raw_id);
+        return air_id;
+    }
+
     pub fn new(height: f64, pressure: f64, density: f64, isentropic_expansion_factor: f64, gas_constant: f64, dynamic_viscosity: f64)->Self{
+        let raw_id = format!("h{height}_p{pressure}_d{density}_g{gamma}_r{R}_v{mu}");
+        let air_id = hash_air_id(&raw_id);
+
         Air{
             id: format!(
-                "h{}_p{}_d{}_g{}_r{}_v{}",
+                air_id,
                 height,
                 pressure,
                 density,
